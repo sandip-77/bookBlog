@@ -21,7 +21,6 @@ app.get('/', (req, res) => {
 })
 
 
-
 app.use('/api/posts', postRoutes);
 app.use('/api/categories', categoryRoutes);
 
