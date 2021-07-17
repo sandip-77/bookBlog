@@ -62,6 +62,7 @@ const getSinglePost = asyncHandler(async(req, res) => {
     const post = await Post.findById(req.params.id)
 
     if(post){
+        await Post.findByIdAndUpdate({_id : req.params.id}, {$inc : {'numViews': 1}})
         res.json(post)
     } else {
         res.status(404)
@@ -82,12 +83,12 @@ const updatePost = asyncHandler(async(req, res) => {
     const post = await Post.findById(req.params.id)
 
     if(post) {
-        post.title = title
-        post.desc = desc
-        post.photo = photo
-        post.category = category
-        post.tags = tags
-        post.podcastAvailable = podcastAvailable
+        post.title = title || post.title
+        post.desc = desc || post.desc
+        post.photo = photo || post.photo
+        post.category = category || post.category
+        post.tags = tags || post.tags
+        post.podcastAvailable = podcastAvailable || post.podcastAvailable
         
         const updatedPost = await post.save()
         res.json(updatedPost)
