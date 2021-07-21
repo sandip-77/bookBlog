@@ -13,16 +13,22 @@ import { Link, useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        zIndex: 10,
+        position:'sticky',
+        top: 0,
         flexGrow: 1,
-        margin: 10,
+        padding: 10,
         [theme.breakpoints.up('md')]:{
-            margin: "10px 50px",
-        }
+            padding: "10px 50px",
+        },
+        boxShadow: "0px 0 83px 0 #55555514",
+        backgroundColor:"#fff"
+        
     },
     navbar:{
         display: 'flex',
         alignItems:'center',
-        justifyContent:"space-between"
+        justifyContent:"space-between",
     },
     social: {
         display: 'none',
@@ -154,6 +160,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     sideMenu:{
+        zIndex: 100,
         fontFamily:"Antic Didone",
         textAlign: 'center',
         position:'fixed',
@@ -202,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     pages:{
-        marginTop:50,
+        marginTop:'5vh',
         '& div':{
             cursor:"pointer",
             fontSize: 34,
@@ -210,9 +217,10 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     copyright:{
-        marginTop: 100,
-        fontSize: 19,
-        margin: "70px 10px 0px 10px"
+        position:'absolute',
+        bottom: '5vh',
+        fontSize: 18,
+        margin: "70px 15px 0px 15px"
     },
     sideMenuIcons:{
         marginTop: 30,
@@ -220,7 +228,8 @@ const useStyles = makeStyles((theme) => ({
             '&:hover':{
                 color:"#a84a49",
             },
-            fontSize: 28
+            fontSize: 28,
+            margin:10
         }
     },
     active:{
@@ -266,8 +275,10 @@ const Navbar = () => {
                 <Grid  item xs={6} md={4}>
                     <Container className={classes.navbrand} maxWidth='sm'>
                         <Box>
-                        <p style={{marginBottom: 5}}><span className={classes.title}>READN</span></p>
-                        THE BOOKS AMONG US
+                        <Link className='link' to="/">
+                            <p style={{marginBottom: 5}}><span className={classes.title}>READN</span></p>
+                            THE BOOKS AMONG US
+                        </Link>
                         </Box>
                     </Container>
                 </Grid>
@@ -288,7 +299,7 @@ const Navbar = () => {
                
                     <Box className={classes.Sidemununavbrand} maxWidth='sm'>
                         <Box>
-                        <Link className='link' to="/">
+                        <Link onClick={manuOpener} className='link' to="/">
                             <p style={{marginBottom: 5}}><span>READN</span></p>
                             THE BOOKS AMONG US
                         </Link>
