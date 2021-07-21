@@ -8,7 +8,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import clsx from 'clsx';
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     navbrand: {
+        cursor:'pointer',
         display: 'block',
         fontSize:10,
         [theme.breakpoints.up('md')]:{
@@ -49,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     icon:{
-        margin:5
+        margin:5,
+        cursor:"pointer",
+        
+
     },
     title:{
         fontFamily:"Antic Didone",
@@ -181,6 +185,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     Sidemununavbrand:{
+        cursor:'pointer',
         marginTop: '10vh',
         display: 'block',
         fontSize:12,
@@ -212,9 +217,17 @@ const useStyles = makeStyles((theme) => ({
     sideMenuIcons:{
         marginTop: 30,
         '& svg':{
-            cursor:"pointer",
+            '&:hover':{
+                color:"#a84a49",
+            },
             fontSize: 28
         }
+    },
+    active:{
+        color: "#a84a49"
+    },
+    notActive:{
+        color: "inherit"
     }
 
 }));
@@ -236,9 +249,9 @@ const Navbar = () => {
     }
 
 
-    // const location = useLocation();
-    // console.log(location.pathname);
-    
+    const location = useLocation();
+    console.log(location.pathname);
+
     return (
         <div className={classes.root}>
             <Grid className={classes.navbar} container>
@@ -272,16 +285,20 @@ const Navbar = () => {
             </Grid>
 
             <div className={ clsx(classes.sideMenu, isMenuOpen ? classes.sideMenuOpen : classes.sideMenuClose) }>
-                <Box className={classes.Sidemununavbrand} maxWidth='sm'>
-                    <Box>
-                    <p style={{marginBottom: 5}}><span>READN</span></p>
-                    THE BOOKS AMONG US
+               
+                    <Box className={classes.Sidemununavbrand} maxWidth='sm'>
+                        <Box>
+                        <Link className='link' to="/">
+                            <p style={{marginBottom: 5}}><span>READN</span></p>
+                            THE BOOKS AMONG US
+                        </Link>
+                        </Box>
                     </Box>
-                </Box>
                 <Box className={classes.pages}>
-                <div style={{color:'#a84a49'}}>Home</div>
-                <div>Reviews</div>
-                <div>Contact</div>
+                    <div className={location.pathname === '/' ? classes.active : classes.notActive}><Link className='link' onClick={manuOpener} to="/">Home</Link></div> 
+                    <div className={location.pathname === '/reviews' ? classes.active : classes.notActive}><Link onClick={manuOpener} className='link' to="/reviews">Reviews</Link></div>
+                    <div className={location.pathname === '/about' ? classes.active : classes.notActive}><Link onClick={manuOpener} className='link' to="/about">About</Link></div>
+                    <div className={location.pathname === '/contact' ? classes.active : classes.notActive}><Link onClick={manuOpener} className='link' to="/contact">Contact</Link></div>
                 </Box>
                 
                 <Box className={classes.sideMenuIcons}>
